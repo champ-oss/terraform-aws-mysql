@@ -5,6 +5,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/logger"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
+	"os"
 	"testing"
 )
 
@@ -29,6 +30,7 @@ func TestChangeSnapshot(t *testing.T) {
 		},
 		Vars: map[string]interface{}{
 			"snapshot_identifier": "",
+			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
 		},
 	}
 

@@ -38,4 +38,5 @@ module "this" {
   iam_database_authentication_enabled = true
   enable_lambda_cw_event              = true
   schedule_expression                 = "rate(1 minute)"
+  iam_auth_docker_tag                 = var.iam_auth_docker_tag
 }

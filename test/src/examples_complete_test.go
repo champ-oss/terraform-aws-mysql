@@ -4,6 +4,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/logger"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
+	"os"
 	"testing"
 	"time"
 )
@@ -20,6 +21,9 @@ func TestExamplesComplete(t *testing.T) {
 		EnvVars: map[string]string{
 			"TF_WORKSPACE": name,
 			"TF_DATA_DIR":  name,
+		},
+		Vars: map[string]interface{}{
+			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
 		},
 	}
 	defer terraform.Destroy(t, terraformOptions)

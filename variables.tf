@@ -13,6 +13,11 @@ variable "source_security_group_id" {
   type        = string
 }
 
+variable "iam_auth_docker_tag" {
+  description = "Docker tag of IAM Auth code to deploy"
+  type        = string
+}
+
 variable "cidr_blocks" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#cidr_blocks"
   type        = list(string)

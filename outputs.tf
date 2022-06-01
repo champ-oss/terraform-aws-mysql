@@ -66,5 +66,5 @@ output "final_snapshot_identifier" {
 
 output "lambda_cloudwatch_log_group" {
   description = "lambda cloudwatch log group"
-  value       = module.lambda_rds_mysql.cloudwatch_log_group
+  value       = module.iam_auth_lambda.cloudwatch_log_group
 }
