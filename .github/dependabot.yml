@@ -15,3 +15,8 @@ updates:
     directory: "/test/src"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "pip"
+    directory: "/iam_auth"
+    schedule:
+      interval: "daily"
