@@ -9,7 +9,7 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_security_group_rule" "from_sg" {
-  description              = "ingress from ${var.source_security_group_id}"
+  description              = "ingress from security group"
   type                     = "ingress"
   from_port                = aws_db_instance.this.port
   to_port                  = aws_db_instance.this.port
@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "from_sg" {
 }
 
 resource "aws_security_group_rule" "from_cidr" {
-  description       = "ingress from ${var.cidr_blocks}"
+  description       = "ingress from cidr blocks"
   type              = "ingress"
   from_port         = aws_db_instance.this.port
   to_port           = aws_db_instance.this.port
