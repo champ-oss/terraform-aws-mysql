@@ -6,6 +6,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 	"os"
+	"os/exec"
 	"testing"
 )
 
@@ -35,7 +36,14 @@ func TestChangeSnapshot(t *testing.T) {
 	}
 
 	defer terraform.Destroy(t, terraformOptions)
-	terraform.InitAndApply(t, terraformOptions)
+	terraform.Init(t, terraformOptions)
+
+	// recursively set prevent destroy to false
+	cmd := exec.Command("bash", "-c", "find . -type f -name '*.tf' -exec sed -i'' -e 's/prevent_destroy = true/prevent_destroy = false/g' {} +")
+	cmd.Dir = "../../"
+	_ = cmd.Run()
+
+	terraform.ApplyAndIdempotent(t, terraformOptions)
 
 	region := terraform.Output(t, terraformOptions, "region")
 	identifier := terraform.Output(t, terraformOptions, "identifier")
