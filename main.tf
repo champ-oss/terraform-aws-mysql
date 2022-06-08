@@ -59,7 +59,6 @@ resource "aws_db_instance" "this" {
       name,                               # snapshots with a different name will show perpetual drift
       username,                           # snapshots with a different username will show perpetual drift
       engine_version,                     # ignore drift for upgrades
-      iam_database_authentication_enabled # ignore drift as update will happen on next maintenance_window
     ]
   }
 }
