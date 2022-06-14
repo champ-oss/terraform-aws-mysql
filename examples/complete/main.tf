@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-1"
+  region = "eu-west-1"
 }
 
 data "aws_region" "current" {}
