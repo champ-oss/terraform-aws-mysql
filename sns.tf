@@ -1,5 +1,5 @@
 resource "aws_sns_topic" "this" {
-  name  = "${var.name}-alarms"
+  name = "${var.name}-alarms"
 }
 
 resource "aws_sns_topic_subscription" "this" {
