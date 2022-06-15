@@ -238,7 +238,7 @@ variable "evaluation_periods" {
 variable "period" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#period"
   type        = number
-  default     = 500 # in seconds
+  default     = 300 # in seconds
 }
 
 variable "ebs_io_balance_threshold" {
