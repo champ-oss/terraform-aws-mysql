@@ -1,8 +1,10 @@
 resource "aws_sns_topic" "this" {
-  name = "${var.name}-alarms"
+  count = var.enable_rds_metric_alarms ? 1 : 0
+  name  = "${var.name}-alarms"
 }
 
 resource "aws_sns_topic_subscription" "this" {
+  count = var.enable_rds_metric_alarms ? 1 : 0
   depends_on = [
     aws_sns_topic.this
   ]
