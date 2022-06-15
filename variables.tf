@@ -145,6 +145,12 @@ variable "enable_lambda_cw_event" {
   type        = bool
 }
 
+variable "enable_rds_metric_alarms" {
+  description = "enable or disable metric alarms for rds"
+  default     = false
+  type        = bool
+}
+
 variable "publicly_accessible" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#publicly_accessible"
   type        = bool
@@ -221,4 +227,40 @@ variable "schedule_expression" {
   description = "event schedule for lambda"
   type        = string
   default     = "cron(0 10 ? * 1 *)" # lambda executes every Sunday at 10am UTC
+}
+
+variable "evaluation_periods" {
+  description = "admin user to be created via lambda function"
+  type        = number
+  default     = 1
+}
+
+variable "period" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#period"
+  type        = number
+  default     = 500 # in seconds
+}
+
+variable "ebs_io_balance_threshold" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+  type        = number
+  default     = 30
+}
+
+variable "burst_balance_threshold" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+  type        = number
+  default     = 30
+}
+
+variable "ebs_byte_balance_threshold" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+  type        = number
+  default     = 30
+}
+
+variable "alarms_email" {
+  description = "rds alarm email"
+  type        = string
+  default     = null
 }
