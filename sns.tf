@@ -8,7 +8,7 @@ resource "aws_sns_topic_subscription" "this" {
   depends_on = [
     aws_sns_topic.this
   ]
-  topic_arn = aws_sns_topic.this.arn
+  topic_arn = aws_sns_topic.this[count.index].arn
   protocol  = "email"
   endpoint  = var.alarms_email
 }
