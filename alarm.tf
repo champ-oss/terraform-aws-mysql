@@ -9,8 +9,8 @@ resource "aws_cloudwatch_metric_alarm" "ebs_byte_balance" {
   statistic           = "Average"
   threshold           = var.ebs_byte_balance_threshold
   alarm_description   = "cloud watch alarm for ebs byte balance"
-  alarm_actions       = aws_sns_topic.this[0].arn
-  ok_actions          = aws_sns_topic.this[0].arn
+  alarm_actions       = "${aws_sns_topic.this[0].arn}"
+  ok_actions          = "${aws_sns_topic.this[0].arn}"
 
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
@@ -29,8 +29,8 @@ resource "aws_cloudwatch_metric_alarm" "ebs_io_balance" {
   statistic           = "Average"
   threshold           = var.ebs_io_balance_threshold
   alarm_description   = "cloud watch alarm for ebs io balance"
-  alarm_actions       = aws_sns_topic.this[0].arn
-  ok_actions          = aws_sns_topic.this[0].arn
+  alarm_actions       = "${aws_sns_topic.this[0].arn}"
+  ok_actions          = "${aws_sns_topic.this[0].arn}"
 
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
@@ -49,8 +49,8 @@ resource "aws_cloudwatch_metric_alarm" "burst_balance" {
   statistic           = "Average"
   threshold           = var.burst_balance_threshold
   alarm_description   = "cloud watch alarm for burst balance"
-  alarm_actions       = aws_sns_topic.this[0].arn
-  ok_actions          = aws_sns_topic.this[0].arn
+  alarm_actions       = "${aws_sns_topic.this[0].arn}"
+  ok_actions          = "${aws_sns_topic.this[0].arn}"
 
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
