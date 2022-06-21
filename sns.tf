@@ -1,6 +1,5 @@
 resource "aws_sns_topic" "this" {
-  count = var.enable_rds_metric_alarms ? 1 : 0
-  name  = "${var.name}-alarms"
+  name_prefix = "${var.name_prefix}-rds-alarms-"
 }
 
 resource "aws_sns_topic_subscription" "this" {
@@ -8,7 +7,7 @@ resource "aws_sns_topic_subscription" "this" {
   depends_on = [
     aws_sns_topic.this
   ]
-  topic_arn = aws_sns_topic.this[0].arn
+  topic_arn = aws_sns_topic.this.arn
   protocol  = "email"
   endpoint  = var.alarms_email
 }
