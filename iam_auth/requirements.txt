@@ -1,6 +1,6 @@
 boto3==1.24.14
 botocore==1.27.10
-jmespath==1.0.0
+jmespath==1.0.1
 PyMySQL==1.0.2
 python-dateutil==2.8.2
 s3transfer==0.6.0
