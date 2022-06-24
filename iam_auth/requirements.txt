@@ -1,5 +1,5 @@
 boto3==1.24.16
-botocore==1.27.15
+botocore==1.27.17
 jmespath==1.0.1
 PyMySQL==1.0.2
 python-dateutil==2.8.2
