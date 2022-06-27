@@ -2,13 +2,14 @@ name: build-iam-auth
 
 on:
   workflow_dispatch:
-  push:
+  schedule:
+   - cron: "0 10 * * *"
 
 env:
   GIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
   GIT_USERNAME: github-actions[bot]
   BRANCH_NAME: update-lambda
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
   REPO_NAME: champ-oss/terraform-aws-mysql
   FILE_NAME: package.zip
 

@@ -15,8 +15,3 @@ variable "name_prefix" {
   default     = null
   type        = string
 }
-
-variable "iam_auth_docker_tag" {
-  description = "IAM Auth Docker tag to deploy"
-  type        = string
-}
