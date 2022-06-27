@@ -17,7 +17,7 @@ module "iam_auth_lambda" {
   enable_vpc          = true
   private_subnet_ids  = var.private_subnet_ids
   filename            = "${path.module}/iam_auth/package.zip"
-  source_code_hash    = filesha256("${path.module}/iam_auth/package.zip")
+  source_code_hash    = filebase64sha256("${path.module}/iam_auth/package.zip")
   handler             = "rds_iam_auth.lambda_handler"
   runtime             = "python3.9"
   vpc_id              = var.vpc_id # eni delete resource bug https://github.com/hashicorp/terraform-provider-aws/issues/10329
