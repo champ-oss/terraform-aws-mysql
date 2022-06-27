@@ -6,6 +6,10 @@ resource "random_string" "identifier" {
   number  = false
 }
 
+data "local_file" "this" {
+  filename = "${path.module}/iam_auth/package.zip"
+}
+
 module "iam_auth_lambda" {
   source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=v1.0.55-d0d7de4"
   git                 = var.git
@@ -16,10 +20,10 @@ module "iam_auth_lambda" {
   schedule_expression = var.schedule_expression
   enable_vpc          = true
   private_subnet_ids  = var.private_subnet_ids
-  sync_image          = true
-  sync_source_repo    = "champtitles/terraform-aws-mysql-iam-auth"
-  ecr_name            = "${var.name}-iam-auth-${random_string.identifier.result}"
-  ecr_tag             = var.iam_auth_docker_tag
+  filename            = data.local_file.this.filename
+  source_code_hash    = data.local_file.this.content_base64
+  handler             = "rds_iam_auth.lambda_handler"
+  runtime             = "python3.9"
   vpc_id              = var.vpc_id # eni delete resource bug https://github.com/hashicorp/terraform-provider-aws/issues/10329
   environment = {
     DB_HOST         = aws_db_instance.this.endpoint

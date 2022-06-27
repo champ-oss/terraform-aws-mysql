@@ -10,6 +10,7 @@ env:
   BRANCH_NAME: update-lambda
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   REPO_NAME: champ-oss/terraform-aws-mysql
+  FILE_NAME: package.zip
 
 defaults:
   run:
@@ -31,21 +32,21 @@ jobs:
         run: pip install -r requirements.txt -t .
 
       - name: zip
-        run: zip -r package.zip *
+        run: zip -r $FILE_NAME *
 
       - name: git commit
         run: |
           git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_USERNAME"
           git fetch && git checkout -b "$BRANCH_NAME" origin/"$BRANCH_NAME" || git checkout -b "$BRANCH_NAME"
-          git add package.zip
-          git commit -m "update lambda package.zip"
+          git add $FILE_NAME
+          git commit -m "update lambda $FILE_NAME"
 
       - name: git push
         run: git push https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_NAME}.git
 
       - name: create pull request
         run: |
-          jq -n --arg title "update lambda package.zip" --arg head "$BRANCH_NAME" --arg base main '{title:$title,head:$head,base:$base}' | curl -d @- \
+          jq -n --arg title "update lambda $FILE_NAME" --arg head "$BRANCH_NAME" --arg base main '{title:$title,head:$head,base:$base}' | curl -d @- \
               -X POST \
               -H "Accept: application/vnd.github.v3+json" \
               -u ${USERNAME}:${GITHUB_TOKEN} \
