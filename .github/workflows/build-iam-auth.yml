@@ -2,11 +2,10 @@ on:
   workflow_dispatch:
   push:
 
-env:
-  REPO: champtitles/terraform-aws-mysql-iam-auth
-  SHA: ${{ github.sha }}
-  DOCKER_USERNAME: champtitles
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
+defaults:
+  run:
+    shell: bash
+    working-directory: iam_auth
 
 jobs:
   build-iam-auth:
@@ -14,16 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2.0.0
+      - uses: actions/setup-python@v4
         with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
+          python-version: '3.9'
+          architecture: 'x64'
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v3.0.0
-        with:
-          context: iam_auth
-          push: true
-          tags: |
-            ${{ env.REPO }}:${{ env.SHA }}
+      - name: build
+        shell: bash
+        run: pip install -r requirements.txt -t .
+
+      - name: zip
+        shell: bash
+        run: zip -r package.zip *
