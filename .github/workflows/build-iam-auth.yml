@@ -1,6 +1,15 @@
+name: build-iam-auth
+
 on:
   workflow_dispatch:
   push:
+
+env:
+  GIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+  GIT_USERNAME: github-actions[bot]
+  BRANCH_NAME: update-lambda
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  REPO_NAME: terraform-aws-mysql
 
 defaults:
   run:
@@ -19,9 +28,17 @@ jobs:
           architecture: 'x64'
 
       - name: build
-        shell: bash
         run: pip install -r requirements.txt -t .
 
       - name: zip
-        shell: bash
         run: zip -r package.zip *
+
+      - name: git commit
+        run: |
+          git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_USERNAME"
+          git fetch && git checkout -b "$BRANCH_NAME" origin/"$BRANCH_NAME" || git checkout -b "$BRANCH_NAME"
+          git add package.zip
+          git commit -m "update lambda package.zip"
+
+      - name: git push
+        run: git push https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_NAME}.git
