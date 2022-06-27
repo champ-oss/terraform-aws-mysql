@@ -23,9 +23,7 @@ func TestExamplesComplete(t *testing.T) {
 			"TF_WORKSPACE": name,
 			"TF_DATA_DIR":  name,
 		},
-		Vars: map[string]interface{}{
-			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
-		},
+		Vars: map[string]interface{}{},
 	}
 	defer terraform.Destroy(t, terraformOptions)
 

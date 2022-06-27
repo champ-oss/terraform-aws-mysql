@@ -31,7 +31,6 @@ func TestChangeSnapshot(t *testing.T) {
 		},
 		Vars: map[string]interface{}{
 			"snapshot_identifier": "",
-			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
 		},
 	}
 
