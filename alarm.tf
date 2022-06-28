@@ -9,8 +9,8 @@ resource "aws_cloudwatch_metric_alarm" "ebs_byte_balance" {
   statistic           = "Average"
   threshold           = var.ebs_byte_balance_threshold
   alarm_description   = "cloud watch alarm for ebs byte balance: ${aws_db_instance.this.id}"
-  alarm_actions       = ["${aws_sns_topic.this.arn}"]
-  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  alarm_actions       = [aws_sns_topic.this.arn]
+  ok_actions          = [aws_sns_topic.this.arn]
 
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
@@ -29,8 +29,8 @@ resource "aws_cloudwatch_metric_alarm" "ebs_io_balance" {
   statistic           = "Average"
   threshold           = var.ebs_io_balance_threshold
   alarm_description   = "cloud watch alarm for ebs io balance: ${aws_db_instance.this.id}"
-  alarm_actions       = ["${aws_sns_topic.this.arn}"]
-  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  alarm_actions       = [aws_sns_topic.this.arn]
+  ok_actions          = [aws_sns_topic.this.arn]
 
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
@@ -49,8 +49,8 @@ resource "aws_cloudwatch_metric_alarm" "burst_balance" {
   statistic           = "Average"
   threshold           = var.burst_balance_threshold
   alarm_description   = "cloud watch alarm for burst balance: ${aws_db_instance.this.id}"
-  alarm_actions       = ["${aws_sns_topic.this.arn}"]
-  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  alarm_actions       = [aws_sns_topic.this.arn]
+  ok_actions          = [aws_sns_topic.this.arn]
 
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
@@ -69,8 +69,8 @@ resource "aws_cloudwatch_metric_alarm" "cpu_warning" {
   period              = var.period
   statistic           = "Average"
   threshold           = var.cpu_threshold
-  alarm_actions       = ["${aws_sns_topic.this.arn}"]
-  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  alarm_actions       = [aws_sns_topic.this.arn]
+  ok_actions          = [aws_sns_topic.this.arn]
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
   }
@@ -88,8 +88,8 @@ resource "aws_cloudwatch_metric_alarm" "memory_warning" {
   period              = var.period
   statistic           = "Average"
   threshold           = var.memory_threshold
-  alarm_actions       = ["${aws_sns_topic.this.arn}"]
-  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  alarm_actions       = [aws_sns_topic.this.arn]
+  ok_actions          = [aws_sns_topic.this.arn]
   dimensions = {
     DBInstanceIdentifier = aws_db_instance.this.id
   }
