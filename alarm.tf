@@ -87,7 +87,7 @@ resource "aws_cloudwatch_metric_alarm" "memory_warning" {
   namespace           = "AWS/RDS"
   period              = var.period
   statistic           = "Average"
-  threshold           = "${var.memory_threshold * 1000000}"
+  threshold           = var.memory_threshold * 1000000
   alarm_actions       = [aws_sns_topic.this.arn]
   ok_actions          = [aws_sns_topic.this.arn]
   dimensions = {
