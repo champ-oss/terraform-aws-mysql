@@ -57,3 +57,41 @@ resource "aws_cloudwatch_metric_alarm" "burst_balance" {
   }
   tags = merge(local.tags, var.tags)
 }
+
+resource "aws_cloudwatch_metric_alarm" "cpu_warning" {
+  count               = var.enable_rds_metric_alarms ? 1 : 0
+  alarm_name          = "rds-${aws_db_instance.this.id}-cpu-warning"
+  alarm_description   = "Average cpu of rds db reached threashold: ${aws_db_instance.this.id}"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = var.evaluation_periods
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/RDS"
+  period              = var.period
+  statistic           = "Average"
+  threshold           = var.cpu_threshold
+  alarm_actions       = ["${aws_sns_topic.this.arn}"]
+  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  dimensions = {
+    DBInstanceIdentifier = aws_db_instance.this.id
+  }
+  tags = merge(local.tags, var.tags)
+}
+
+resource "aws_cloudwatch_metric_alarm" "memory_warning" {
+  count               = var.enable_rds_metric_alarms ? 1 : 0
+  alarm_name          = "rds-${aws_db_instance.this.id}-memory-warning"
+  alarm_description   = "Average memory of rds db reached threashold: ${aws_db_instance.this.id}"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = var.evaluation_periods
+  metric_name         = "FreeableMemory"
+  namespace           = "AWS/RDS"
+  period              = var.period
+  statistic           = "Average"
+  threshold           = var.memory_threshold
+  alarm_actions       = ["${aws_sns_topic.this.arn}"]
+  ok_actions          = ["${aws_sns_topic.this.arn}"]
+  dimensions = {
+    DBInstanceIdentifier = aws_db_instance.this.id
+  }
+  tags = merge(local.tags, var.tags)
+}
