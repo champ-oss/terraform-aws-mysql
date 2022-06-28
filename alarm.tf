@@ -81,7 +81,7 @@ resource "aws_cloudwatch_metric_alarm" "memory_warning" {
   count               = var.enable_rds_metric_alarms ? 1 : 0
   alarm_name          = "rds-${aws_db_instance.this.id}-memory-warning"
   alarm_description   = "Average memory of rds db reached threashold: ${aws_db_instance.this.id}"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
+  comparison_operator = "LessThanThreshold"
   evaluation_periods  = var.evaluation_periods
   metric_name         = "FreeableMemory"
   namespace           = "AWS/RDS"
