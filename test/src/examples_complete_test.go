@@ -15,14 +15,9 @@ import (
 func TestExamplesComplete(t *testing.T) {
 	t.Parallel()
 
-	name := "complete"
-
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../../examples/complete",
-		EnvVars: map[string]string{
-			"TF_WORKSPACE": name,
-			"TF_DATA_DIR":  name,
-		},
+		EnvVars:      map[string]string{},
 		Vars: map[string]interface{}{
 			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
 		},
@@ -44,18 +39,10 @@ func TestExamplesComplete(t *testing.T) {
 	identifier := terraform.Output(t, terraformOptions, "identifier")
 	finalSnapshotIdentifier := terraform.Output(t, terraformOptions, "final_snapshot_identifier")
 	resourceId := terraform.Output(t, terraformOptions, "resource_id")
-	// get lambda tf output logGroupName
 	cloudwatchLogGroup := terraform.Output(t, terraformOptions, "lambda_cloudwatch_log_group")
-
-	// Calling Sleep method to test lambda function
-	time.Sleep(60 * time.Second)
 
 	logger.Log(t, "Creating AWS Session")
 	awsSess := GetAWSSession()
-
-	actualLogStreamName := GetLogStream(awsSess, region, cloudwatchLogGroup)
-	logger.Log(t, "getting logs from lambda")
-	outputLogs := GetLogs(awsSess, region, cloudwatchLogGroup, actualLogStreamName)
 
 	logger.Log(t, "Scheduling snapshots to be deleted")
 	defer DeleteDBBackup(awsSess, region, resourceId)
@@ -83,11 +70,17 @@ func TestExamplesComplete(t *testing.T) {
 	manualSnapshots := GetDBSnapshots(awsSess, region, identifier, "manual")
 	assert.Len(t, manualSnapshots, 1)
 
-	logger.Log(t, "checking lambda connection status")
-	expectedConnectionResponse := "SUCCESS"
-	assert.Contains(t, *outputLogs[1].Message, expectedConnectionResponse)
+	logger.Log(t, "Waiting for IAM Auth Lambda to run")
+	time.Sleep(60 * time.Second)
 
-	logger.Log(t, "query output from RDS that read only database user was created")
+	actualLogStreamName := GetLogStream(awsSess, region, cloudwatchLogGroup)
+	logger.Log(t, "Getting logs for IAM Auth Lambda")
+	outputLogs := GetLogs(awsSess, region, cloudwatchLogGroup, actualLogStreamName)
+
+	logger.Log(t, "Checking logs for connection status for IAM Auth Lambda")
+	assert.Contains(t, *outputLogs[1].Message, "SUCCESS")
+
+	logger.Log(t, "Checking logs for IAM Auth Lambda that read only database user was created")
 	expectedQueryResponse := "('%', 'db_iam_admin')"
 	assert.Contains(t, *outputLogs[2].Message, expectedQueryResponse)
 }
