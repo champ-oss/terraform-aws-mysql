@@ -253,6 +253,18 @@ variable "burst_balance_threshold" {
   default     = 30
 }
 
+variable "cpu_threshold" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+  type        = number
+  default     = 90
+}
+
+variable "memory_threshold" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+  type        = number
+  default     = 256 # 256 MB
+}
+
 variable "ebs_byte_balance_threshold" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
   type        = number
