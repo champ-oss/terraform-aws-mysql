@@ -262,7 +262,7 @@ variable "cpu_threshold" {
 variable "memory_threshold" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
   type        = number
-  default     = 256 # 256 MB
+  default     = 32 # MB
 }
 
 variable "ebs_byte_balance_threshold" {
