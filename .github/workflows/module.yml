@@ -76,6 +76,7 @@ jobs:
       success: ${{ steps.setoutput.outputs.success }}
     steps:
       - id: setoutput
+        working-directory: .
         run: echo "::set-output name=success::true"
 
   module:
