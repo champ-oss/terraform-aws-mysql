@@ -16,7 +16,7 @@ variable "source_security_group_id" {
 variable "iam_auth_docker_tag" {
   description = "Docker tag of IAM Auth code to deploy"
   type        = string
-  default     = "bc0926499fcfd133e876a3c207456fd3dd0f38e7"
+  default     = "158524236d98a0f5582a11864199ec6bf4980fb0"
 }
 
 variable "cidr_blocks" {
