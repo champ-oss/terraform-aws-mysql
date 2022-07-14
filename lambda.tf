@@ -7,7 +7,7 @@ resource "random_string" "identifier" {
 }
 
 module "iam_auth_lambda" {
-  source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=1758e84093bc7d59018811fcc0c269c656e498e3"
+  source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=v1.0.70-697b9b7"
   git                 = var.git
   name                = "${var.name}-iam-auth-${random_string.identifier.result}"
   tags                = merge(local.tags, var.tags)
@@ -21,7 +21,6 @@ module "iam_auth_lambda" {
   ecr_name            = "${var.name}-iam-auth-${random_string.identifier.result}"
   ecr_tag             = var.iam_auth_docker_tag
   vpc_id              = var.vpc_id # eni delete resource bug https://github.com/hashicorp/terraform-provider-aws/issues/10329
-  force_delete        = var.force_delete
   environment = {
     DB_HOST         = aws_db_instance.this.endpoint
     DB_USERNAME     = var.username
