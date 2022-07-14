@@ -33,5 +33,4 @@ module "this" {
   delete_automated_backups            = true
   skip_final_snapshot                 = true
   backup_retention_period             = 1
-  force_delete                        = true
 }
