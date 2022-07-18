@@ -16,6 +16,9 @@ A Terraform module for deploying AWS RDS MySQL databases
 
 See the `examples/` folder
 
+<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
+
 ## Features
 
 

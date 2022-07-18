@@ -24,3 +24,4 @@ jobs:
             .github/workflows/module.yml
             .github/workflows/release.yml
             .github/workflows/sonar.yml
+            .github/workflows/doc.yml
