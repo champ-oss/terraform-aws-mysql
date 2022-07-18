@@ -7,7 +7,7 @@ resource "random_string" "identifier" {
 }
 
 module "iam_auth_lambda" {
-  source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=v1.0.71-2e2e648"
+  source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=v1.0.73-e686155"
   git                 = var.git
   name                = "${var.name}-iam-auth-${random_string.identifier.result}"
   tags                = merge(local.tags, var.tags)
