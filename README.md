@@ -34,7 +34,7 @@ See the `examples/` folder
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_auth_lambda"></a> [iam\_auth\_lambda](#module\_iam\_auth\_lambda) | github.com/champ-oss/terraform-aws-lambda.git | v1.0.71-2e2e648 |
+| <a name="module_iam_auth_lambda"></a> [iam\_auth\_lambda](#module\_iam\_auth\_lambda) | github.com/champ-oss/terraform-aws-lambda.git | v1.0.74-630d0c1 |
 
 ## Resources
 
