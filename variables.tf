@@ -139,6 +139,12 @@ variable "iam_database_authentication_enabled" {
   type        = bool
 }
 
+variable "iam_auth_lambda_enabled" {
+  description = "enable or disable the lambda for setting up iam auth"
+  default     = true
+  type        = bool
+}
+
 variable "enable_lambda_cw_event" {
   description = "enable or disable cloudwatch event trigger for lambda"
   default     = true

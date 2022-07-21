@@ -66,5 +66,5 @@ output "final_snapshot_identifier" {
 
 output "lambda_cloudwatch_log_group" {
   description = "lambda cloudwatch log group"
-  value       = module.iam_auth_lambda.cloudwatch_log_group
+  value       = var.iam_auth_lambda_enabled ? module.iam_auth_lambda[0].cloudwatch_log_group : ""
 }
