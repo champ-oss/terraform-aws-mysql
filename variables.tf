@@ -141,7 +141,7 @@ variable "iam_database_authentication_enabled" {
 
 variable "iam_auth_lambda_enabled" {
   description = "enable or disable the lambda for setting up iam auth"
-  default     = true
+  default     = false
   type        = bool
 }
 
