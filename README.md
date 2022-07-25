@@ -85,7 +85,7 @@ See the `examples/` folder
 | <a name="input_final_snapshot_identifier"></a> [final\_snapshot\_identifier](#input\_final\_snapshot\_identifier) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#final_snapshot_identifier | `string` | `null` | no |
 | <a name="input_git"></a> [git](#input\_git) | Name of the Git repo | `string` | `"terraform-aws-mysql"` | no |
 | <a name="input_iam_auth_docker_tag"></a> [iam\_auth\_docker\_tag](#input\_iam\_auth\_docker\_tag) | Docker tag of IAM Auth code to deploy | `string` | `"158524236d98a0f5582a11864199ec6bf4980fb0"` | no |
-| <a name="input_iam_auth_lambda_enabled"></a> [iam\_auth\_lambda\_enabled](#input\_iam\_auth\_lambda\_enabled) | enable or disable the lambda for setting up iam auth | `bool` | `true` | no |
+| <a name="input_iam_auth_lambda_enabled"></a> [iam\_auth\_lambda\_enabled](#input\_iam\_auth\_lambda\_enabled) | enable or disable the lambda for setting up iam auth | `bool` | `false` | no |
 | <a name="input_iam_database_authentication_enabled"></a> [iam\_database\_authentication\_enabled](#input\_iam\_database\_authentication\_enabled) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#iam_database_authentication_enabled | `bool` | `true` | no |
 | <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#instance_class | `string` | `"db.t3.micro"` | no |
 | <a name="input_maintenance_window"></a> [maintenance\_window](#input\_maintenance\_window) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#maintenance_window | `string` | `"Sun:07:00-Sun:08:00"` | no |
