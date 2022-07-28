@@ -30,7 +30,6 @@ module "this" {
   iam_auth_lambda_enabled             = true
   enable_lambda_cw_event              = true
   schedule_expression                 = "rate(1 minute)"
-  iam_auth_docker_tag                 = var.iam_auth_docker_tag
   delete_automated_backups            = true
   skip_final_snapshot                 = true
   backup_retention_period             = 1

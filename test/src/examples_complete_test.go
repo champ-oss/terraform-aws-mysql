@@ -4,7 +4,6 @@ import (
 	"github.com/gruntwork-io/terratest/modules/logger"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
-	"os"
 	"testing"
 	"time"
 )
@@ -16,9 +15,7 @@ func TestExamplesComplete(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../../examples/complete",
 		EnvVars:      map[string]string{},
-		Vars: map[string]interface{}{
-			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
-		},
+		Vars:          map[string]interface{}{},
 	}
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApplyAndIdempotent(t, terraformOptions)
