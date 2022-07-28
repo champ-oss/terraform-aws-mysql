@@ -16,9 +16,6 @@ func TestExamplesComplete(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../../examples/complete",
 		EnvVars:      map[string]string{},
-		Vars: map[string]interface{}{
-			"iam_auth_docker_tag": os.Getenv("GITHUB_SHA"),
-		},
 	}
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApplyAndIdempotent(t, terraformOptions)
