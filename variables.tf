@@ -282,3 +282,11 @@ variable "alarms_email" {
   type        = string
   default     = null
 }
+
+variable "db_instance_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
+  type        = string
+  default     = null
+}
+
+

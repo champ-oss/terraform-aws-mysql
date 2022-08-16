@@ -17,6 +17,12 @@ resource "random_password" "password" {
   }
 }
 
+data "aws_db_snapshot" "this" {
+  count                  = var.db_instance_identifier != null ? 1 : 0
+  most_recent            = true
+  db_instance_identifier = var.db_instance_identifier
+}
+
 resource "aws_db_instance" "this" {
   allocated_storage                   = var.allocated_storage
   engine                              = var.engine
@@ -36,7 +42,7 @@ resource "aws_db_instance" "this" {
   monitoring_role_arn                 = aws_iam_role.rds_enhanced_monitoring.arn
   performance_insights_enabled        = var.performance_insights_enabled
   storage_encrypted                   = var.storage_encrypted
-  snapshot_identifier                 = var.snapshot_identifier
+  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : data.aws_db_snapshot.this.id
   multi_az                            = var.multi_az
   publicly_accessible                 = var.publicly_accessible
   db_subnet_group_name                = aws_db_subnet_group.this.id
