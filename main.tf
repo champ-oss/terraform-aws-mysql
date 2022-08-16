@@ -42,7 +42,7 @@ resource "aws_db_instance" "this" {
   monitoring_role_arn                 = aws_iam_role.rds_enhanced_monitoring.arn
   performance_insights_enabled        = var.performance_insights_enabled
   storage_encrypted                   = var.storage_encrypted
-  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : data.aws_db_snapshot.this.id[count.index]
+  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : data.aws_db_snapshot.this[0].id
   multi_az                            = var.multi_az
   publicly_accessible                 = var.publicly_accessible
   db_subnet_group_name                = aws_db_subnet_group.this.id
