@@ -18,7 +18,7 @@ resource "random_password" "password" {
 }
 
 data "aws_db_snapshot" "this" {
-  count = var.db_instance_identifier ? 1 : 0
+  count                  = var.db_instance_identifier != null ? 1 : 0
   most_recent            = true
   db_instance_identifier = var.db_instance_identifier
 }
