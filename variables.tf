@@ -188,7 +188,7 @@ variable "protect" {
 }
 
 variable "snapshot_identifier" {
-  default     = null
+  default     = ""
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#snapshot_identifier"
   type        = string
 }
