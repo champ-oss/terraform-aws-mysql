@@ -1,5 +1,5 @@
 locals {
-  snapshot_timestamp = formatdate("'${var.name_prefix}-'YYYYMMDDHHmmss", timestamp())
+  snapshot_timestamp     = formatdate("'${var.name_prefix}-'YYYYMMDDHHmmss", timestamp())
   db_instance_identifier = var.db_instance_identifier != null ? data.aws_db_snapshot.this[0].id : null
   tags = {
     cost    = "rds"
@@ -19,7 +19,7 @@ resource "random_password" "password" {
 }
 
 data "aws_db_snapshot" "this" {
-  count = var.db_instance_identifier != null ? 1 : 0
+  count                  = var.db_instance_identifier != null ? 1 : 0
   most_recent            = true
   db_instance_identifier = var.db_instance_identifier
 }
