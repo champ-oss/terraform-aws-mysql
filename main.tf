@@ -18,6 +18,7 @@ resource "random_password" "password" {
   }
 }
 
+# database must exist and have snapshot available, used for ephemeral testing
 data "aws_db_snapshot" "this" {
   count                  = var.db_snapshot_source != null ? 1 : 0
   most_recent            = true
