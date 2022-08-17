@@ -1,5 +1,6 @@
 locals {
   snapshot_timestamp = formatdate("'${var.name_prefix}-'YYYYMMDDHHmmss", timestamp())
+  snapshot_identifier = var.snapshot_identifier != null ? var.snapshot_identifier : data.aws_db_snapshot.this.id
   tags = {
     cost    = "rds"
     creator = "terraform"
@@ -41,7 +42,7 @@ resource "aws_db_instance" "this" {
   monitoring_role_arn                 = aws_iam_role.rds_enhanced_monitoring.arn
   performance_insights_enabled        = var.performance_insights_enabled
   storage_encrypted                   = var.storage_encrypted
-  snapshot_identifier                 = var.snapshot_identifier != "" ? var.snapshot_identifier : data.aws_db_snapshot.this.id
+  snapshot_identifier                 = var.snapshot_identifier != null ? local.snapshot_identifier : null
   multi_az                            = var.multi_az
   publicly_accessible                 = var.publicly_accessible
   db_subnet_group_name                = aws_db_subnet_group.this.id
