@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-2"
+  region = "us-east-2"
 }
 
 data "aws_region" "current" {}
@@ -33,4 +33,5 @@ module "this" {
   delete_automated_backups            = true
   skip_final_snapshot                 = true
   backup_retention_period             = 1
+  db_snapshot_source                  = "env-cloud-test-ephemeral"
 }
