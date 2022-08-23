@@ -18,11 +18,13 @@ resource "random_password" "password" {
   }
 }
 
-# database must exist and have snapshot available, used for ephemeral testing
+# snapshot share must exist and have snapshot available, used for ephemeral testing
 data "aws_db_snapshot" "this" {
   count                  = var.db_snapshot_source != null ? 1 : 0
-  most_recent            = true
   db_instance_identifier = var.db_snapshot_source
+  most_recent            = true
+  include_shared         = true
+  snapshot_type          = "shared"
 }
 
 resource "aws_db_instance" "this" {
