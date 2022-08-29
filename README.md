@@ -57,8 +57,10 @@ See the `examples/` folder
 | [aws_ssm_parameter.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [random_password.password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_string.identifier](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
+| [aws_caller_identity.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_db_snapshot.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot) | data source |
 | [aws_iam_policy_document.rds_enhanced_monitoring](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
 
@@ -75,7 +77,7 @@ See the `examples/` folder
 | <a name="input_copy_tags_to_snapshot"></a> [copy\_tags\_to\_snapshot](#input\_copy\_tags\_to\_snapshot) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#copy_tags_to_snapshot | `bool` | `true` | no |
 | <a name="input_cpu_threshold"></a> [cpu\_threshold](#input\_cpu\_threshold) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold | `number` | `90` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#name | `string` | `"this"` | no |
-| <a name="input_db_snapshot_source_arn"></a> [db\_snapshot\_source\_arn](#input\_db\_snapshot\_source\_arn) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier | `string` | `null` | no |
+| <a name="input_db_snapshot_source_id"></a> [db\_snapshot\_source\_id](#input\_db\_snapshot\_source\_id) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier | `string` | `null` | no |
 | <a name="input_delete_automated_backups"></a> [delete\_automated\_backups](#input\_delete\_automated\_backups) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#delete_automated_backups | `bool` | `false` | no |
 | <a name="input_ebs_byte_balance_threshold"></a> [ebs\_byte\_balance\_threshold](#input\_ebs\_byte\_balance\_threshold) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold | `number` | `30` | no |
 | <a name="input_ebs_io_balance_threshold"></a> [ebs\_io\_balance\_threshold](#input\_ebs\_io\_balance\_threshold) | https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold | `number` | `30` | no |
