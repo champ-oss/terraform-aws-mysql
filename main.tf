@@ -22,7 +22,6 @@ resource "random_password" "password" {
 data "aws_db_snapshot" "this" {
   count                  = var.db_snapshot_source_arn != null ? 1 : 0
   db_snapshot_identifier = var.db_snapshot_source_arn
-  most_recent            = true
   include_shared         = true
   snapshot_type          = "shared"
 }
