@@ -1,6 +1,6 @@
 locals {
   snapshot_timestamp = formatdate("'${var.name_prefix}-'YYYYMMDDHHmmss", timestamp())
-  db_snapshot_source = var.db_snapshot_source_arn != null ? data.aws_db_snapshot.this[0].id : null
+  db_snapshot_source = var.db_snapshot_source_id != null ? data.aws_db_snapshot.this[0].id : null
   tags = {
     cost    = "rds"
     creator = "terraform"
@@ -18,13 +18,16 @@ resource "random_password" "password" {
   }
 }
 
+data "aws_region" "this" {}
+data "aws_caller_identity" "this" {}
+
 # snapshot share must exist and have snapshot available, used for ephemeral testing
 data "aws_db_snapshot" "this" {
-  count                          = var.db_snapshot_source_arn != null ? 1 : 0
-  db_snapshot_identifier         = var.db_snapshot_source_arn
-  most_recent                    = true
-  include_shared                 = true
-  snapshot_type                  = "shared"
+  count                  = var.db_snapshot_source_id != null ? 1 : 0
+  db_snapshot_identifier = "arn:aws:rds:${data.aws_region.this.name}:${data.aws_caller_identity.this.account_id}:snapshot:${var.db_snapshot_source_id}"
+  most_recent            = true
+  include_shared         = true
+  snapshot_type          = "shared"
 }
 
 resource "aws_db_instance" "this" {
