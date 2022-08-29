@@ -283,7 +283,7 @@ variable "alarms_email" {
   default     = null
 }
 
-variable "db_snapshot_source" {
+variable "db_snapshot_source_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
   type        = string
   default     = null
