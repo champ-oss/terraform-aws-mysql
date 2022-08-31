@@ -8,7 +8,7 @@ resource "random_string" "identifier" {
 }
 
 module "iam_auth_lambda" {
-  source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=v1.0.85-95bfaff"
+  source              = "github.com/champ-oss/terraform-aws-lambda.git?ref=v1.0.90-8f25f76"
   count               = var.iam_auth_lambda_enabled ? 1 : 0
   git                 = var.git
   name                = "${var.name}-iam-auth-${random_string.identifier[0].result}"
