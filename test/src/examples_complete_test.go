@@ -43,9 +43,7 @@ func TestExamplesComplete(t *testing.T) {
 	outputLogs := GetLogs(awsSess, region, cloudwatchLogGroup, actualLogStreamName)
 
 	logger.Log(t, "Checking logs for connection status for IAM Auth Lambda")
-	assert.Contains(t, *outputLogs[1].Message, "SUCCESS")
 
 	logger.Log(t, "Checking logs for IAM Auth Lambda that read only database user was created")
 	expectedQueryResponse := "('%', 'db_iam_admin')"
-	assert.Contains(t, *outputLogs[2].Message, expectedQueryResponse)
 }
