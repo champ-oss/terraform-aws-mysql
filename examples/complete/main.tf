@@ -5,7 +5,7 @@ provider "aws" {
 data "aws_region" "current" {}
 
 module "vpc" {
-  source                   = "github.com/champ-oss/terraform-aws-vpc.git?ref=v1.0.32-86c316d"
+  source                   = "github.com/champ-oss/terraform-aws-vpc.git?ref=v1.0.35-1462786"
   git                      = var.git
   availability_zones_count = 2
   retention_in_days        = 1
