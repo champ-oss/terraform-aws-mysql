@@ -18,12 +18,11 @@ resource "random_password" "password" {
   }
 }
 
-# snapshot share must exist and have snapshot available, used for ephemeral testing
+# snapshot type is manual and db identifier is set
 data "aws_db_snapshot" "this" {
   count                  = var.db_snapshot_source_arn != null ? 1 : 0
   db_snapshot_identifier = var.db_snapshot_source_arn
-  include_shared         = true
-  snapshot_type          = "shared"
+  snapshot_type          = "manual"
 }
 
 resource "aws_db_instance" "this" {
