@@ -64,10 +64,10 @@ resource "aws_db_instance" "this" {
       identifier,
       identifier_prefix,
       final_snapshot_identifier,
-      name,              # snapshots with a different name will show perpetual drift
-      username,          # snapshots with a different username will show perpetual drift
-      engine_version,    # ignore drift for upgrades
-      instance_class # ignore instance class on upgrades
+      name,           # snapshots with a different name will show perpetual drift
+      username,       # snapshots with a different username will show perpetual drift
+      engine_version, # ignore drift for upgrades
+      instance_class  # ignore instance class on upgrades
     ]
   }
 }
