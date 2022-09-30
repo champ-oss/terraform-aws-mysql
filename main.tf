@@ -18,12 +18,11 @@ resource "random_password" "password" {
   }
 }
 
-# snapshot share must exist and have snapshot available, used for ephemeral testing
+# snapshot type is manual and db identifier is set
 data "aws_db_snapshot" "this" {
   count                  = var.db_snapshot_source_arn != null ? 1 : 0
   db_snapshot_identifier = var.db_snapshot_source_arn
-  include_shared         = true
-  snapshot_type          = "shared"
+  snapshot_type          = "manual"
 }
 
 resource "aws_db_instance" "this" {
@@ -68,6 +67,7 @@ resource "aws_db_instance" "this" {
       name,           # snapshots with a different name will show perpetual drift
       username,       # snapshots with a different username will show perpetual drift
       engine_version, # ignore drift for upgrades
+      instance_class  # ignore instance class on upgrades
     ]
   }
 }
