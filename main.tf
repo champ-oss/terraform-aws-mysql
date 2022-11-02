@@ -57,6 +57,7 @@ resource "aws_db_instance" "this" {
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   delete_automated_backups            = var.delete_automated_backups
+  replicate_source_db                 = var.replicate_source_db
   tags                                = merge(local.tags, var.tags)
 
   lifecycle {
