@@ -37,7 +37,7 @@ module "this" {
 
 module "replica" {
   source                              = "../../"
-  name_prefix                         = var.git
+  name_prefix                         = "${var.git}-replica"
   private_subnet_ids                  = module.vpc.private_subnets_ids
   source_security_group_id            = aws_security_group.test.id
   vpc_id                              = module.vpc.vpc_id

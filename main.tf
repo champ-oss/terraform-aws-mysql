@@ -47,7 +47,7 @@ resource "aws_db_instance" "this" {
   snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
   multi_az                            = var.multi_az
   publicly_accessible                 = var.publicly_accessible
-  db_subnet_group_name                = aws_db_subnet_group.this.id
+  db_subnet_group_name                = var.replicate_source_db != null ? null : aws_db_subnet_group.this.id # should not be set if creating a replica
   vpc_security_group_ids              = [aws_security_group.rds.id]
   backup_retention_period             = var.backup_retention_period
   apply_immediately                   = !var.protect
