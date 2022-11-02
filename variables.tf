@@ -289,4 +289,10 @@ variable "db_snapshot_source_arn" {
   default     = null
 }
 
+variable "replicate_source_db" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#replicate_source_db"
+  type        = string
+  default     = null
+}
+
 
