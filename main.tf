@@ -76,11 +76,11 @@ resource "aws_db_instance" "replica" {
   count                               = var.enable_replica ? 1 : 0
   allocated_storage                   = var.allocated_storage
   instance_class                      = var.instance_class
-  identifier                          = "${var.name_prefix}-replica"
+  identifier                          = "${aws_db_instance.this.identifier}-replica"
   password                            = random_password.password.result
   parameter_group_name                = var.parameter_group_name
   skip_final_snapshot                 = var.skip_final_snapshot
-  final_snapshot_identifier           = var.final_snapshot_identifier != null ? var.final_snapshot_identifier : local.snapshot_timestamp
+  final_snapshot_identifier           = "${aws_db_instance.this.final_snapshot_identifier}-replica"
   maintenance_window                  = var.maintenance_window
   backup_window                       = var.backup_window
   max_allocated_storage               = var.max_allocated_storage
