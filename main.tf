@@ -88,7 +88,6 @@ resource "aws_db_instance" "replica" {
   monitoring_role_arn                 = aws_iam_role.rds_enhanced_monitoring.arn
   performance_insights_enabled        = var.performance_insights_enabled
   storage_encrypted                   = var.storage_encrypted
-  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
   multi_az                            = var.multi_az
   publicly_accessible                 = var.publicly_accessible
   vpc_security_group_ids              = [aws_security_group.rds.id]
