@@ -47,7 +47,7 @@ resource "aws_db_instance" "this" {
   snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
   multi_az                            = var.multi_az
   publicly_accessible                 = var.publicly_accessible
-  db_subnet_group_name                = var.replicate_source_db != null ? null : aws_db_subnet_group.this.id # should not be set if creating a replica
+  db_subnet_group_name                = aws_db_subnet_group.this.id
   vpc_security_group_ids              = [aws_security_group.rds.id]
   backup_retention_period             = var.backup_retention_period
   apply_immediately                   = !var.protect
@@ -57,7 +57,6 @@ resource "aws_db_instance" "this" {
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   delete_automated_backups            = var.delete_automated_backups
-  replicate_source_db                 = var.replicate_source_db
   tags                                = merge(local.tags, var.tags)
 
   lifecycle {
@@ -71,6 +70,37 @@ resource "aws_db_instance" "this" {
       instance_class  # ignore instance class on upgrades
     ]
   }
+}
+
+resource "aws_db_instance" "replica" {
+  count                               = var.enable_replica ? 1 : 0
+  allocated_storage                   = var.allocated_storage
+  instance_class                      = var.instance_class
+  identifier                          = "${var.name_prefix}-replica"
+  password                            = random_password.password.result
+  parameter_group_name                = var.parameter_group_name
+  skip_final_snapshot                 = var.skip_final_snapshot
+  final_snapshot_identifier           = var.final_snapshot_identifier != null ? var.final_snapshot_identifier : local.snapshot_timestamp
+  maintenance_window                  = var.maintenance_window
+  backup_window                       = var.backup_window
+  max_allocated_storage               = var.max_allocated_storage
+  monitoring_interval                 = var.monitoring_interval
+  monitoring_role_arn                 = aws_iam_role.rds_enhanced_monitoring.arn
+  performance_insights_enabled        = var.performance_insights_enabled
+  storage_encrypted                   = var.storage_encrypted
+  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
+  multi_az                            = var.multi_az
+  publicly_accessible                 = var.publicly_accessible
+  vpc_security_group_ids              = [aws_security_group.rds.id]
+  backup_retention_period             = var.backup_retention_period
+  apply_immediately                   = !var.protect
+  allow_major_version_upgrade         = var.allow_major_version_upgrade
+  auto_minor_version_upgrade          = var.auto_minor_version_upgrade
+  deletion_protection                 = var.protect
+  copy_tags_to_snapshot               = var.copy_tags_to_snapshot
+  iam_database_authentication_enabled = var.iam_database_authentication_enabled
+  delete_automated_backups            = var.delete_automated_backups
+  tags                                = merge(local.tags, var.tags)
 }
 
 resource "aws_db_subnet_group" "this" {
