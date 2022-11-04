@@ -289,10 +289,14 @@ variable "db_snapshot_source_arn" {
   default     = null
 }
 
-variable "replicate_source_db" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#replicate_source_db"
-  type        = string
-  default     = null
+variable "enable_replica" {
+  description = "Create a read replica for the primary database"
+  type        = bool
+  default     = false
 }
 
-
+variable "replica_instance_class" {
+  default     = "db.t4g.micro"
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#instance_class"
+  type        = string
+}
