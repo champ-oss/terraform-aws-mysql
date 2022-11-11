@@ -6,7 +6,7 @@ resource "aws_dms_endpoint" "this" {
   database_name = var.database_name
   password      = random_password.password.result
   port          = aws_db_instance.this.port
-  server_name   = aws_db_instance.this.endpoint
+  server_name   = aws_db_instance.this.address
   tags          = merge(local.tags, var.tags)
   username      = var.username
 }
