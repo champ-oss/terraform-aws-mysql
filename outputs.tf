@@ -71,5 +71,5 @@ output "lambda_cloudwatch_log_group" {
 
 output "dms_endpoint_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_arn"
-  value       = aws_dms_endpoint.this.endpoint_arn
+  value       = var.create_dms_endpoint ? aws_dms_endpoint.this[0].endpoint_arn : null
 }
