@@ -300,3 +300,15 @@ variable "replica_instance_class" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#instance_class"
   type        = string
 }
+
+variable "create_dms_endpoint" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
+  type        = bool
+  default     = false
+}
+
+variable "dms_endpoint_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
+  type        = string
+  default     = "source"
+}
