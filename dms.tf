@@ -9,4 +9,9 @@ resource "aws_dms_endpoint" "this" {
   server_name   = aws_db_instance.this.address
   tags          = merge(local.tags, var.tags)
   username      = var.username
+
+  timeouts {
+    create = "60m"
+    delete = "60m"
+  }
 }
