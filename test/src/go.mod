@@ -3,8 +3,8 @@ module github.com/champ-oss/terraform-aws-mysql
 go 1.17
 
 require (
-	github.com/aws/aws-sdk-go v1.44.155
-	github.com/gruntwork-io/terratest v0.41.4
+	github.com/aws/aws-sdk-go v1.44.178
+	github.com/gruntwork-io/terratest v0.41.10
 	github.com/stretchr/testify v1.8.1
 )
 

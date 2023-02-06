@@ -34,5 +34,5 @@ module "this" {
   skip_final_snapshot                 = true
   backup_retention_period             = 1
   enable_replica                      = true
-  create_dms_endpoint                 = true
+  publicly_accessible                 = true
 }
