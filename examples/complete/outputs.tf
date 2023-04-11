@@ -33,8 +33,3 @@ output "arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#arn"
   value       = module.this.arn
 }
-
-output "lambda_cloudwatch_log_group" {
-  description = "output of lambda log group for unit test"
-  value       = module.this.lambda_cloudwatch_log_group
-}
