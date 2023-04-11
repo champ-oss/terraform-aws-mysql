@@ -13,12 +13,6 @@ variable "source_security_group_id" {
   type        = string
 }
 
-variable "iam_auth_docker_tag" {
-  description = "Docker tag of IAM Auth code to deploy"
-  type        = string
-  default     = "a5f43f9c4ab5d1b0be4923f58bff799e53d38753"
-}
-
 variable "cidr_blocks" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#cidr_blocks"
   type        = list(string)
@@ -64,12 +58,6 @@ variable "database_name" {
 variable "name_prefix" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#identifier"
   default     = "mysqldb-test"
-  type        = string
-}
-
-variable "name" {
-  description = "lambda identifier"
-  default     = "rds"
   type        = string
 }
 
@@ -139,18 +127,6 @@ variable "iam_database_authentication_enabled" {
   type        = bool
 }
 
-variable "iam_auth_lambda_enabled" {
-  description = "enable or disable the lambda for setting up iam auth"
-  default     = false
-  type        = bool
-}
-
-variable "enable_lambda_cw_event" {
-  description = "enable or disable cloudwatch event trigger for lambda"
-  default     = true
-  type        = bool
-}
-
 variable "enable_rds_metric_alarms" {
   description = "enable or disable metric alarms for rds"
   default     = false
@@ -215,24 +191,6 @@ variable "delete_automated_backups" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#delete_automated_backups"
   default     = false
   type        = bool
-}
-
-variable "mysql_iam_read_username" {
-  description = "read only user to be created via lambda function"
-  type        = string
-  default     = "db_iam_read"
-}
-
-variable "mysql_iam_admin_username" {
-  description = "admin user to be created via lambda function"
-  type        = string
-  default     = "db_iam_admin"
-}
-
-variable "schedule_expression" {
-  description = "event schedule for lambda"
-  type        = string
-  default     = "cron(0 10 ? * 1 *)" # lambda executes every Sunday at 10am UTC
 }
 
 variable "evaluation_periods" {

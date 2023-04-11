@@ -63,8 +63,3 @@ output "final_snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#final_snapshot_identifier"
   value       = aws_db_instance.this.final_snapshot_identifier
 }
-
-output "lambda_cloudwatch_log_group" {
-  description = "lambda cloudwatch log group"
-  value       = var.iam_auth_lambda_enabled ? module.iam_auth_lambda[0].cloudwatch_log_group : ""
-}

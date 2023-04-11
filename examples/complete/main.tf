@@ -27,9 +27,6 @@ module "this" {
   allocated_storage                   = 5
   instance_class                      = "db.t3.micro"
   iam_database_authentication_enabled = true
-  iam_auth_lambda_enabled             = true
-  enable_lambda_cw_event              = true
-  schedule_expression                 = "rate(1 minute)"
   delete_automated_backups            = true
   skip_final_snapshot                 = true
   backup_retention_period             = 1
