@@ -61,12 +61,6 @@ variable "name_prefix" {
   type        = string
 }
 
-variable "name" {
-  description = "lambda identifier"
-  default     = "rds"
-  type        = string
-}
-
 variable "username" {
   default     = "root"
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#username"
