@@ -127,12 +127,6 @@ variable "iam_database_authentication_enabled" {
   type        = bool
 }
 
-variable "iam_auth_lambda_enabled" {
-  description = "enable or disable the lambda for setting up iam auth"
-  default     = false
-  type        = bool
-}
-
 variable "enable_rds_metric_alarms" {
   description = "enable or disable metric alarms for rds"
   default     = false
