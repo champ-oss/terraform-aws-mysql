@@ -40,7 +40,7 @@ variable "allocated_storage" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version"
   type        = string
-  default     = "8.0.27"
+  default     = "8.0"
 }
 
 variable "instance_class" {
@@ -153,7 +153,7 @@ variable "allow_major_version_upgrade" {
 
 variable "auto_minor_version_upgrade" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#auto_minor_version_upgrade"
-  default     = false
+  default     = true
   type        = bool
 }
 
