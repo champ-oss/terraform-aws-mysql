@@ -1,27 +1,32 @@
-provider "aws" {
-  region = "eu-west-1"
+data "aws_vpcs" "this" {
+  tags = {
+    purpose = "vega"
+  }
 }
 
-data "aws_region" "current" {}
+data "aws_subnets" "this" {
+  tags = {
+    purpose = "vega"
+    Type    = "Private"
+  }
 
-module "vpc" {
-  source                   = "github.com/champ-oss/terraform-aws-vpc.git?ref=v1.0.49-a63798e"
-  name                     = var.git
-  availability_zones_count = 2
-  retention_in_days        = 1
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpcs.this.ids[0]]
+  }
 }
 
 resource "aws_security_group" "test" {
   name_prefix = "test-rds-"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.aws_vpcs.this.ids[0]
 }
 
 module "this" {
   source                              = "../../"
-  name_prefix                         = var.git
-  private_subnet_ids                  = module.vpc.private_subnets_ids
+  name_prefix                         = "terraform-aws-mysql"
+  private_subnet_ids                  = data.aws_subnets.this.ids
   source_security_group_id            = aws_security_group.test.id
-  vpc_id                              = module.vpc.vpc_id
+  vpc_id                              = data.aws_vpcs.this.ids[0]
   protect                             = false
   multi_az                            = false
   allocated_storage                   = 5
@@ -31,5 +36,4 @@ module "this" {
   skip_final_snapshot                 = true
   backup_retention_period             = 1
   enable_replica                      = true
-  publicly_accessible                 = true
 }
